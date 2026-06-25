@@ -18,8 +18,7 @@ class ProductImportService
         private Client            $client,
         private ProductRepository $productRepository
     )
-    {
-    }
+    {}
 
     /**
      * @return int

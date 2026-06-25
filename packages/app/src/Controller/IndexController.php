@@ -13,8 +13,8 @@ readonly class IndexController
 {
     public function __construct(
         private TemplateRenderer $templateRenderer
-    ) {
-    }
+    )
+    {}
 
     /**
      * @throws RuntimeError

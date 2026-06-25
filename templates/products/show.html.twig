@@ -1,7 +1,7 @@
 <h1>{{ product.getTitle() }}</h1>
 <img src="{{ product.getThumbnail() }}" width="200" alt="{{ product.getTitle() }}">
 
-<p>{{ product.getDescription() }}</p>
+<p>{{ product.description }}</p>
 <p>Price: €{{ product.getPrice()|number_format(2, '.', ',') }}</p>
 <p>Discounted Price: €{{ product.getFinalPrice()|number_format(2, '.', ',') }}</p>
 <p>Brand: {{ product.getBrand() }}</p>

@@ -6,27 +6,26 @@ class ProductDTO
 {
 
     /**
-     * @param int $externalId
+     * @param int $external_id
      * @param string $title
      * @param string $description
      * @param float $price
-     * @param float $discountPercentage
+     * @param float $discount_percentage
      * @param string|null $brand
      * @param string $category
      * @param string $thumbnail
      */
     public function __construct(
-        private int    $externalId,
-        private string $title,
-        private string $description,
-        private float  $price,
-        private float  $discountPercentage,
+        private int     $external_id,
+        private string  $title,
+        private string  $description,
+        private float   $price,
+        private float   $discount_percentage,
         private ?string $brand,
-        private string $category,
-        private string $thumbnail
+        private string  $category,
+        private string  $thumbnail
     )
-    {
-    }
+    {}
 
     /**
      * @param array $data
@@ -35,11 +34,11 @@ class ProductDTO
     public static function fromArray(array $data): self
     {
         return new self(
-            externalId: $data['id'],
+            external_id: $data['id'],
             title: $data['title'],
             description: $data['description'],
             price: $data['price'],
-            discountPercentage: ($data['discount_percentage']),
+            discount_percentage: ($data['discountPercentage']),
             brand: $data['brand'] ?? null,
             category: $data['category'],
             thumbnail: $data['thumbnail']
@@ -52,11 +51,11 @@ class ProductDTO
     public function toArray(): array
     {
         return [
-            'externalId' => $this->externalId,
+            'external_id' => $this->external_id,
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'discountPercentage' => $this->discountPercentage,
+            'discount_percentage' => $this->discount_percentage,
             'brand' => $this->brand,
             'category' => $this->category,
             'thumbnail' => $this->thumbnail
@@ -66,17 +65,9 @@ class ProductDTO
     /**
      * @return int
      */
-    public function getId(): int
-    {
-        return $this->externalId;
-    }
-
-    /**
-     * @return int
-     */
     public function getExternalId(): int
     {
-        return $this->externalId;
+        return $this->external_id;
     }
 
     /**
@@ -116,7 +107,7 @@ class ProductDTO
      */
     public function getDiscountPercentage(): float
     {
-        return $this->discountPercentage;
+        return $this->discount_percentage;
     }
 
     /**
@@ -140,6 +131,6 @@ class ProductDTO
      */
     public function getFinalPrice(): float
     {
-        return $this->price * (1 - $this->discountPercentage / 100);
+        return $this->price * (1 - $this->discount_percentage / 100);
     }
 }

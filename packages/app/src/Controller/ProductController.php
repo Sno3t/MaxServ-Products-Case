@@ -20,8 +20,7 @@ class ProductController
         private TemplateRenderer  $templateRenderer,
         private ProductRepository $productRepository
     )
-    {
-    }
+    {}
 
     /**
      * @return void

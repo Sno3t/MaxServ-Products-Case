@@ -28,11 +28,10 @@ class Product
 
         public string $category,
 
-        public float $discountPercentage,
+        public float  $discountPercentage,
 
         public string $thumbnail,
     )
-    {
-    }
+    {}
 
 }

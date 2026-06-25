@@ -14,8 +14,7 @@ class ProductRepository
     public function __construct(
         private Connection $db
     )
-    {
-    }
+    {}
 
     /**
      * @param string|null $sort
