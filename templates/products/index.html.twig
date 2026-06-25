@@ -6,6 +6,7 @@
         <th>Title</th>
         <th>Brand</th>
         <th>Price</th>
+        <th>Discounted price</th>
         <th>Category</th>
     </tr>
     </thead>
@@ -14,14 +15,14 @@
     {% for product in products %}
         <tr>
             <td>
-                <a href="/products/{{ product.id }}">
-                    {{ product.title }}
+                <a href="/products/{{ product.getId() }}">
+                    {{ product.getTitle() }}
                 </a>
             </td>
-
-            <td>{{ product.brand }}</td>
-            <td>{{ product.price }}</td>
-            <td>{{ product.category }}</td>
+            <td>{{ product.getBrand() }}</td>
+            <td>{{ product.getPrice() }}</td>
+            <td>{{ product.getFinalPrice()|number_format(2, '.', ',') }}</td>
+            <td>{{ product.getCategory() }}</td>
         </tr>
     {% endfor %}
     </tbody>

@@ -3,6 +3,7 @@
 namespace MaxServ\App\Repository;
 
 
+use MaxServ\App\DTO\ProductDTO;
 use MaxServ\Core\Database\Connection;
 
 class ProductRepository
@@ -21,9 +22,14 @@ class ProductRepository
      */
     public function findAll(): array
     {
-        return $this->db->getConnection()
+        $rows = $this->db->getConnection()
             ->query('SELECT * FROM products')
             ->fetchAll();
+
+        return array_map(
+            fn(array $row) => ProductDTO::fromArray($row),
+            $rows
+        );
     }
 
     /**

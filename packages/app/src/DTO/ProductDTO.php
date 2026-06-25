@@ -39,7 +39,7 @@ class ProductDTO
             title: $data['title'],
             description: $data['description'],
             price: $data['price'],
-            discountPercentage: $data['discountPercentage'],
+            discountPercentage: (float) ($data['discount_percentage'] ?? 0),
             brand: $data['brand'] ?? null,
             category: $data['category'],
             thumbnail: $data['thumbnail']
@@ -52,14 +52,78 @@ class ProductDTO
     public function toArray(): array
     {
         return [
-            'external_id' => $this->externalId,
+            'externalId' => $this->externalId,
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'discount_percentage' => $this->discountPercentage,
+            'discountPercentage' => $this->discountPercentage,
             'brand' => $this->brand,
             'category' => $this->category,
             'thumbnail' => $this->thumbnail
         ];
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * @return int
+     */
+    public function getExternalId(): int
+    {
+        return $this->externalId;
+    }
+
+    /**
+     * @return string
+     */
+    public function getTitle(): string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrice(): float
+    {
+        return $this->price;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscountPercentage(): float
+    {
+        return $this->discountPercentage;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategory(): string
+    {
+        return $this->category;
+    }
+
+    /**
+     * @return float
+     */
+    public function getFinalPrice(): float
+    {
+        return $this->price * (1 - $this->discountPercentage / 100);
     }
 }

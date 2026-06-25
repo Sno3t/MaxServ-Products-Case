@@ -31,7 +31,6 @@ class ProductController
     public function index(): void
     {
         $products = $this->productRepository->findAll();
-
         echo $this->templateRenderer->render('products/index.html.twig', [
             'products' => $products
         ]);
