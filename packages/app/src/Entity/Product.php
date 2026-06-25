@@ -5,7 +5,7 @@ namespace MaxServ\App\Entity;
 class Product
 {
     /**
-     * @param int $id
+     * @param int $external_id
      * @param string $title
      * @param string $description
      * @param float $price
@@ -16,7 +16,7 @@ class Product
      */
     public function __construct(
 
-        public int    $id,
+        public int    $external_id,
 
         public string $title,
 

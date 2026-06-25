@@ -6,22 +6,22 @@ class ProductDTO
 {
 
     /**
-     * @param int $id
+     * @param int $externalId
      * @param string $title
      * @param string $description
      * @param float $price
-     * @param int $discountPercentage
-     * @param string $brand
+     * @param float $discountPercentage
+     * @param string|null $brand
      * @param string $category
      * @param string $thumbnail
      */
     public function __construct(
-        private int    $id,
+        private int    $externalId,
         private string $title,
         private string $description,
         private float  $price,
-        private int    $discountPercentage,
-        private string $brand,
+        private float  $discountPercentage,
+        private ?string $brand,
         private string $category,
         private string $thumbnail
     )
@@ -35,12 +35,12 @@ class ProductDTO
     public static function fromArray(array $data): self
     {
         return new self(
-            id: $data['id'],
+            externalId: $data['id'],
             title: $data['title'],
             description: $data['description'],
             price: $data['price'],
             discountPercentage: $data['discountPercentage'],
-            brand: $data['brand'],
+            brand: $data['brand'] ?? null,
             category: $data['category'],
             thumbnail: $data['thumbnail']
         );
@@ -52,11 +52,11 @@ class ProductDTO
     public function toArray(): array
     {
         return [
-            'id' => $this->id,
+            'external_id' => $this->externalId,
             'title' => $this->title,
             'description' => $this->description,
             'price' => $this->price,
-            'discountPercentage' => $this->discountPercentage,
+            'discount_percentage' => $this->discountPercentage,
             'brand' => $this->brand,
             'category' => $this->category,
             'thumbnail' => $this->thumbnail

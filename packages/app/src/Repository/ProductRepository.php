@@ -26,7 +26,7 @@ class ProductRepository
 
     public function create(array $data): void
     {
-        $stmt = $this->db->getConnection()->prepare('INSERT INTO products (id, title, description, price, brand, category, discountPercentage, thumbnail) VALUES (:id, :title, :description, :price, :brand, :category, :discountPercentage, :thumbnail)');
+        $stmt = $this->db->getConnection()->prepare('INSERT INTO products (external_id, title, description, price, brand, category, discount_percentage, thumbnail) VALUES (:external_id, :title, :description, :price, :brand, :category, :discount_percentage, :thumbnail)');
         $stmt->execute($data);
     }
 

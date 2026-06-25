@@ -27,7 +27,7 @@ class ProductImportService
      */
     public function importProducts(): int
     {
-        $response = $this->client->get('/https://dummyjson.com/products');
+        $response = $this->client->get('https://dummyjson.com/products');
 
         $products = json_decode(
             $response->getBody()->getContents(),
@@ -35,7 +35,7 @@ class ProductImportService
         );
         $count = 0;
 
-        foreach ($products as $product) {
+        foreach ($products['products'] as $product) {
             $dto = ProductDTO::fromArray($product);
 
             $this->productRepository->create(
