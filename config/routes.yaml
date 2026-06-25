@@ -1,3 +1,11 @@
-index:
+home:
   path: /
   controller: MaxServ\App\Controller\IndexController::index
+
+products:
+  path: /products/
+  controller: MaxServ\App\Controller\ProductController::index
+
+product_show:
+  path: /products/{id}/
+  controller: MaxServ\App\Controller\ProductController::show

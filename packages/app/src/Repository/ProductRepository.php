@@ -17,6 +17,35 @@ class ProductRepository
     }
 
     /**
+     * @return array
+     */
+    public function findAll(): array
+    {
+        return $this->db->getConnection()
+            ->query('SELECT * FROM products')
+            ->fetchAll();
+    }
+
+    /**
+     * @param int $id
+     * @return array|null
+     */
+    public function find(int $id): ?array
+    {
+        $stmt = $this->db->getConnection()->prepare(
+            'SELECT * FROM products WHERE id = :id'
+        );
+
+        $stmt->execute([
+            'id' => $id
+        ]);
+
+        $product = $stmt->fetch();
+
+        return $product ?: null;
+    }
+
+    /**
      * @param array $data
      * @return void
      */
