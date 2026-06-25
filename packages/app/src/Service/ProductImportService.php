@@ -15,7 +15,7 @@ class ProductImportService
      * @param ProductRepository $productRepository
      */
     public function __construct(
-        private Client $client,
+        private Client            $client,
         private ProductRepository $productRepository
     )
     {
@@ -27,7 +27,7 @@ class ProductImportService
      */
     public function importProducts(): int
     {
-        $response = $this->client->get('https://dummyjson.com/products');
+        $response = $this->client->get('https://dummyjson.com/products?limit=100');
 
         $products = json_decode(
             $response->getBody()->getContents(),
@@ -38,7 +38,7 @@ class ProductImportService
         foreach ($products['products'] as $product) {
             $dto = ProductDTO::fromArray($product);
 
-            $this->productRepository->create(
+            $this->productRepository->save(
                 $dto->toArray()
             );
 
