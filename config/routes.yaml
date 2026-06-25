@@ -3,9 +3,13 @@ home:
   controller: MaxServ\App\Controller\IndexController::index
 
 products:
-  path: /products/
+  path: /products{trailingSlash}
   controller: MaxServ\App\Controller\ProductController::index
+  requirements:
+    trailingSlash: "/?" # trailing slashes are causing issues with the route matching, so I'm making it optional
 
 product_show:
-  path: /products/{id}/
+  path: /products/{id}{trailingSlash}
   controller: MaxServ\App\Controller\ProductController::show
+  requirements:
+    trailingSlash: "/?"

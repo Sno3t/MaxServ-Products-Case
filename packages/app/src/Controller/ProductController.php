@@ -44,9 +44,11 @@ class ProductController
      * @throws RuntimeError
      * @throws SyntaxError
      */
-    public function show(int $id): void
+    public function show(array $parameters): void
     {
-        $product = $this->productRepository->find($id);
+        // for some reason when passing the id directly as an int, it doesn't work and it passes the whole routing parameter array instead
+        // I couldn't find a fix without changing the core router, so I just changed the method signature to accept an array instead of an int
+        $product = $this->productRepository->find($parameters['id']);
 
         echo $this->templateRenderer->render('products/show.html.twig', [
             'product' => $product
