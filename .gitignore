@@ -1,5 +1,4 @@
 # Ignore everything by default
-*
 
 # Project files
 !/.gitignore
@@ -30,3 +29,9 @@
 !/packages/core/**/*
 !/packages/app
 !/packages/app/**/*
+
+# IDE
+.idea/
+
+# Dependencies
+/vendor/
