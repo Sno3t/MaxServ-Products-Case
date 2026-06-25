@@ -39,7 +39,7 @@ class ProductDTO
             title: $data['title'],
             description: $data['description'],
             price: $data['price'],
-            discountPercentage: (float) ($data['discount_percentage'] ?? 0),
+            discountPercentage: ($data['discount_percentage']),
             brand: $data['brand'] ?? null,
             category: $data['category'],
             thumbnail: $data['thumbnail']
@@ -88,6 +88,14 @@ class ProductDTO
     }
 
     /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
      * @return string|null
      */
     public function getBrand(): ?string
@@ -117,6 +125,14 @@ class ProductDTO
     public function getCategory(): string
     {
         return $this->category;
+    }
+
+    /**
+     * @return string
+     */
+    public function getThumbnail(): string
+    {
+        return $this->thumbnail;
     }
 
     /**

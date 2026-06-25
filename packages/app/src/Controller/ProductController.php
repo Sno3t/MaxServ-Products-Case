@@ -4,6 +4,7 @@ namespace MaxServ\App\Controller;
 
 use MaxServ\App\Repository\ProductRepository;
 use MaxServ\Core\Render\TemplateRenderer;
+use Symfony\Component\HttpFoundation\Request;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
@@ -30,7 +31,11 @@ class ProductController
      */
     public function index(): void
     {
-        $products = $this->productRepository->findAll();
+        $request = Request::createFromGlobals();
+        $sort = $request->query->get('sort');
+
+        $products = $this->productRepository->findAllSorted($sort);
+
         echo $this->templateRenderer->render('products/index.html.twig', [
             'products' => $products
         ]);

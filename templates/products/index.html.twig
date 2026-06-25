@@ -3,11 +3,21 @@
 <table>
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Brand</th>
-        <th>Price</th>
-        <th>Discounted price</th>
-        <th>Category</th>
+        <th>
+            <a href="/products?sort=title">Title</a>
+        </th>
+        <th>
+            <a href="/products?sort=brand">Brand</a>
+        </th>
+        <th>
+            <a href="/products?sort=price">Price</a>
+        </th>
+        <th>
+            <a href="/products?sort=final_price">Discounted price</a>
+        </th>
+        <th>
+            <a href="/products?sort=category">Category</a>
+        </th>
     </tr>
     </thead>
 
@@ -20,8 +30,8 @@
                 </a>
             </td>
             <td>{{ product.getBrand() }}</td>
-            <td>{{ product.getPrice() }}</td>
-            <td>{{ product.getFinalPrice()|number_format(2, '.', ',') }}</td>
+            <td>€{{ product.getPrice()|number_format(2, '.', ',') }}</td>
+            <td>€{{ product.getFinalPrice()|number_format(2, '.', ',') }}</td>
             <td>{{ product.getCategory() }}</td>
         </tr>
     {% endfor %}

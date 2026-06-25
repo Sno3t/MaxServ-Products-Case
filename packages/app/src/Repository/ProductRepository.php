@@ -18,37 +18,49 @@ class ProductRepository
     }
 
     /**
+     * @param string|null $sort
      * @return array
      */
-    public function findAll(): array
+    public function findAllSorted(?string $sort): array
     {
         $rows = $this->db->getConnection()
             ->query('SELECT * FROM products')
             ->fetchAll();
 
-        return array_map(
-            fn(array $row) => ProductDTO::fromArray($row),
+        $products = array_map(
+            fn($row) => ProductDTO::fromArray($row),
             $rows
         );
+
+        usort($products, function ($a, $b) use ($sort) {
+            return match ($sort) {
+                'title' => $a->getTitle() <=> $b->getTitle(),
+                'brand' => $a->getBrand() <=> $b->getBrand(),
+                'price' => $a->getPrice() <=> $b->getPrice(),
+                'final_price' => $a->getFinalPrice() <=> $b->getFinalPrice(),
+                'category' => $a->getCategory() <=> $b->getCategory(),
+                default => $a->getId() <=> $b->getId(),
+            };
+        });
+
+        return $products;
     }
 
     /**
      * @param int $id
      * @return array|null
      */
-    public function find(int $id): ?array
+    public function find(int $id): ?ProductDTO
     {
         $stmt = $this->db->getConnection()->prepare(
             'SELECT * FROM products WHERE id = :id'
         );
 
-        $stmt->execute([
-            'id' => $id
-        ]);
+        $stmt->execute(['id' => $id]);
 
-        $product = $stmt->fetch();
+        $row = $stmt->fetch();
 
-        return $product ?: null;
+        return $row ? ProductDTO::fromArray($row) : null;
     }
 
     /**
